@@ -1,0 +1,4 @@
+/node_modules
+/coverage
+exceptions.log
+logfile.log
