@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
 import { apiCallBegan } from "../api";
+import { apiEndpoints } from "../../constants";
 
 const slice = createSlice({
   name: "suggestions",
@@ -47,7 +48,7 @@ export default slice.reducer;
 export const getSuggestions = (data) => dispatch => {
     return dispatch(
       apiCallBegan({
-        url: '/suggestions',
+        url: apiEndpoints.SUGGESTIONS_API_ENDPOINT,
         method: 'post',
         data,
         onStart: suggestionsRequested.type,
