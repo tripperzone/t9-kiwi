@@ -1,3 +1,4 @@
 import apiEndpoints from './apiEndpoints';
+import keyDataMap from './keyDataMap';
 
-export { apiEndpoints }
+export { apiEndpoints, keyDataMap }
