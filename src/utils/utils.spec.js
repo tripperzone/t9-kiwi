@@ -1,5 +1,5 @@
 import { binaryInsert, keyValueExists } from './';
-import { binaryInsertMocks } from './__mocks__';
+import { binaryInsertMocks, keyValueExistsMocks } from './__mocks__';
 
 describe('testing binaryInsert function', () => {
     let array;
@@ -39,5 +39,44 @@ describe('testing binaryInsert function', () => {
 });
 
 describe('testing keyValueExists function', () => {
+    let array;
+    let key;
+    let value;
 
+    beforeEach(() => {
+        array = keyValueExistsMocks.arrayWithoutWord;
+        key = 'word';
+        value = 'developer';
+    });
+
+    const exec = () => keyValueExists(array, key, value);
+
+    it('returns false when key "word" is not found with value "developer" in current array', () => {
+        const result = exec();
+        expect(result).toBe(false);
+    });
+
+    it('returns false when key "word" is found with value "developer" in current array', () => {
+        array = keyValueExistsMocks.arrayWithWord;
+        const result = exec();
+        expect(result).toBe(true);
+    });
+
+    it('returns false when sent key does not exists in target array', () => {
+        key = 'code';
+        const result = exec();
+        expect(result).toBe(false);
+    });
+
+    it('returns false if an empty array is sent', () => {
+        array = [];
+        const result = exec();
+        expect(result).toBe(false);
+    });
+
+    it('returns false when no value is sent', () => {
+        value = undefined;
+        const result = exec();
+        expect(result).toBe(false);
+    });
 });
