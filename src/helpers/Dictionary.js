@@ -16,8 +16,8 @@ export default class Dictionary {
     });
 
     lineReader.on('line', (line) => {
-      const tuple = line.split(/\t/);
-      this.trieNode.insert(tuple);
+      const [frequency, word] = line.split(/\t/);
+      this.trieNode.insert({ frequency, word});
     });
 
     lineReader.on('close', () => winston.info('Trie dictionary ready'));

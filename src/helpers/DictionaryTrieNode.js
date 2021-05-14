@@ -1,4 +1,5 @@
 import letterToNumberMap from "../utils/letterToNumberMap";
+import filterRepeated from "../utils/filterRepeated";
 import binaryInsert from "../utils/binaryInsertion.js";
 
 /**
@@ -15,9 +16,9 @@ class DictionaryTrieNode {
     this.root = this.emptyNode();
   }
 
-  insert(tuple) {
-    const [frequency, word] = tuple;
-    const comparator = (a, b) => b[0] - a[0];
+  insert(wordData) {
+    const { word } = wordData;
+    const comparator = (a, b) => b.frequency - a.frequency;
 
     if (word.length === 0) return;
 
@@ -44,11 +45,11 @@ class DictionaryTrieNode {
       currentNode = currentNode.children[digit];
 
       if (!isLastNode) {
-        binaryInsert(currentNode.suggestions.deepLevel, tuple, comparator);
+        binaryInsert(currentNode.suggestions.deepLevel, wordData, comparator);
       }
     });
 
-    binaryInsert(currentNode.suggestions.nodeLevel, tuple, comparator);
+    binaryInsert(currentNode.suggestions.nodeLevel, wordData, comparator);
     
   }
 
@@ -67,7 +68,12 @@ class DictionaryTrieNode {
       suggestions = currentNode.suggestions;
     });
 
-    return suggestions;
+    const filteredSuggestions = {
+      nodeLevel: filterRepeated(suggestions.nodeLevel, 'word'),
+      deepLevel: filterRepeated(suggestions.deepLevel, 'word'),
+    }
+
+    return filteredSuggestions;
   }
 }
 

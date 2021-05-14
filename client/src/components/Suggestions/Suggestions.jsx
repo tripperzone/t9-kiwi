@@ -49,7 +49,7 @@ const Suggestions = () => {
                 <SuggestionsTitle>Current Words</SuggestionsTitle>
                 
                 <SuggestionsResult>
-                    { nodeLevel.map(([frequency, word], index) => 
+                    { nodeLevel.map(({frequency, word}, index) => 
                         <Suggestion 
                             frequencyColor={frequencyToColorMap(frequency)} 
                             key={index}
@@ -64,7 +64,7 @@ const Suggestions = () => {
                 <SuggestionsTitle>Other Suggestions</SuggestionsTitle>
                 
                 <SuggestionsResult>
-                    { deepLevel.map(([frequency, word], index) =>
+                    { deepLevel.map(({frequency, word}, index) =>
                         <Suggestion
                             frequencyColor={frequencyToColorMap(frequency)} 
                             key={index}
