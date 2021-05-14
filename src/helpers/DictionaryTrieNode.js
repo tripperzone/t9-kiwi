@@ -1,12 +1,6 @@
 import letterToNumberMap from "../utils/letterToNumberMap";
-import filterRepeated from "../utils/filterRepeated";
+import keyValueExists from "../utils/keyValueExists";
 import binaryInsert from "../utils/binaryInsertion.js";
-
-/**
- * TODO:
- * - Insert tuples in order of frequency
- * - Retrieve tuples in order of frequency
- */
 
 class DictionaryTrieNode {
   constructor() {
@@ -44,12 +38,13 @@ class DictionaryTrieNode {
 
       currentNode = currentNode.children[digit];
 
-      if (!isLastNode) {
+      if (!isLastNode && !keyValueExists(currentNode.suggestions.deepLevel, 'word', word))
         binaryInsert(currentNode.suggestions.deepLevel, wordData, comparator);
-      }
+      
     });
 
-    binaryInsert(currentNode.suggestions.nodeLevel, wordData, comparator);
+    if (!keyValueExists(currentNode.suggestions.nodeLevel, 'word', word)) 
+      binaryInsert(currentNode.suggestions.nodeLevel, wordData, comparator);
     
   }
 
@@ -68,12 +63,7 @@ class DictionaryTrieNode {
       suggestions = currentNode.suggestions;
     });
 
-    const filteredSuggestions = {
-      nodeLevel: filterRepeated(suggestions.nodeLevel, 'word'),
-      deepLevel: filterRepeated(suggestions.deepLevel, 'word'),
-    }
-
-    return filteredSuggestions;
+    return suggestions;
   }
 }
 
