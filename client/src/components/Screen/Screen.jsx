@@ -5,7 +5,6 @@ import styled from 'styled-components';
 
 const StyledScreen = styled.div`
   background: #EEEEEE;
-  border: 1px #CCCCCC solid;
   padding: 16px;
   font-size: 24px;
   min-height: 24px;

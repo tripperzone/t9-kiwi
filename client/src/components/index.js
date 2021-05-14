@@ -1,13 +1,13 @@
 import { Keypad } from './Keypad';
 import { Screen } from './Screen';
-import { Tools } from './Tools';
+import { ResetButton } from './ResetButton';
 import { Key } from './Key';
 import { Suggestions } from './Suggestions';
 
 export {
     Keypad, 
     Screen, 
-    Tools,
+    ResetButton,
     Key,
     Suggestions,
 }

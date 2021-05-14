@@ -1,14 +1,19 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { addKeyToString, getSuggestions, getCurrentKeyString } from "../../store/reducers/suggestions";
+import { 
+    addKeyToString, 
+    getSuggestions, 
+    clearSuggestions, 
+    getCurrentKeyString, 
+} from "../../store/reducers/suggestions";
 
 import styled from 'styled-components';
 
-import { Key } from '../';
+import { Key, ResetButton } from '../';
 import { keyDataMap } from '../../constants';
 
 const StyledKeypad = styled.div`
-    border: 1px #CCCCCC solid;
+    border-top: 1px #CCCCCC solid;
     padding: 16px;
     display: flex;
     flex-wrap: wrap;
@@ -23,22 +28,29 @@ const Keypad = () => {
         dispatch(addKeyToString(key));
     };
 
+    const handleReset = () => {
+        dispatch(clearSuggestions());
+    };
+
     useEffect(() => {
         dispatch(getSuggestions({ numericString }));
     }, [dispatch, numericString]);
 
     return (
-        <StyledKeypad>
-            {keyDataMap.map((key, index) => 
-                <Key 
-                    key={index}
-                    numberValue={key.numberValue}
-                    displayNumber={key.displayNumber}
-                    displayLetters={key.displayLetters}
-                    onKeyClick={handleKeyClick}
-                />
-            )}
-        </StyledKeypad>
+        <>
+            <StyledKeypad>
+                {keyDataMap.map((key, index) => 
+                    <Key 
+                        key={index}
+                        numberValue={key.numberValue}
+                        displayNumber={key.displayNumber}
+                        displayLetters={key.displayLetters}
+                        onKeyClick={handleKeyClick}
+                    />
+                )}
+            </StyledKeypad>
+            <ResetButton onReset={handleReset}/>
+        </>
     )
 }
 

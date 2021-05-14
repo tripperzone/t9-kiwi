@@ -12,6 +12,7 @@ const AppContainer = styled.div`
 const ControlContainer = styled.div`
   flex: 1;
   max-width: 300px;
+  border: 1px #CCCCCC solid;
 `;
 
 const ResultsContainer = styled.div`

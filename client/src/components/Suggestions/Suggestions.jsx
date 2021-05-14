@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { getSuggestionsList } from "../../store/reducers/suggestions";
+import { frequencyToColorMap } from "../../constants";
 
 import styled from 'styled-components';
 
@@ -23,7 +24,19 @@ const SuggestionsTitle = styled.div`
 `;
 
 const SuggestionsResult = styled.div`
-    padding: 16px;
+    padding-top: 16px;
+    overflow-y: auto;
+    height: 80vh;
+`;
+
+const Suggestion = styled.div`
+    padding: 4px 12px;
+    background: #EEEEEE;
+    font-weight: bold;
+    color: ${props => props.frequencyColor};
+    display: inline-block;
+    margin-right: 6px;
+    margin-bottom: 6px;
 `;
 
 const Suggestions = () => {
@@ -33,18 +46,32 @@ const Suggestions = () => {
     return (
         <SuggestionsContainer>
             <SuggestionsColumn>
-                <SuggestionsTitle>Node Level Suggestions</SuggestionsTitle>
+                <SuggestionsTitle>Current Words</SuggestionsTitle>
                 
                 <SuggestionsResult>
-                    { JSON.stringify(nodeLevel) }
+                    { nodeLevel.map(([frequency, word], index) => 
+                        <Suggestion 
+                            frequencyColor={frequencyToColorMap(frequency)} 
+                            key={index}
+                        >
+                            <span>{word}</span>
+                        </Suggestion>
+                    ) }
                 </SuggestionsResult>
                 
             </SuggestionsColumn>
             <SuggestionsColumn>
-                <SuggestionsTitle>Deep Level Suggestions</SuggestionsTitle>
+                <SuggestionsTitle>Other Suggestions</SuggestionsTitle>
                 
                 <SuggestionsResult>
-                    { JSON.stringify(deepLevel) }
+                    { deepLevel.map(([frequency, word], index) =>
+                        <Suggestion
+                            frequencyColor={frequencyToColorMap(frequency)} 
+                            key={index}
+                        >
+                            <span>{word}</span>
+                        </Suggestion>
+                    ) }
                 </SuggestionsResult>
                 
             </SuggestionsColumn>
