@@ -1,6 +1,8 @@
-import letterToNumberMap from "../utils/letterToNumberMap";
-import keyValueExists from "../utils/keyValueExists";
-import binaryInsert from "../utils/binaryInsertion.js";
+import { 
+  letterToNumberMap,
+  keyValueExists,
+  binaryInsert,
+} from "../utils";
 
 class DictionaryTrieNode {
   constructor() {
