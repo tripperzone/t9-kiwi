@@ -1,3 +1,3 @@
-const filterRepeated = (array, key) => array.filter((v,i,a)=>a.findIndex(t=>(t[key] === v[key]))===i);
+const filterRepeated = (array, key) => [...new Map(array.map(item => [item[key], item])).values()];
 
 export default filterRepeated;
