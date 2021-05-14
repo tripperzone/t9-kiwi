@@ -15,4 +15,4 @@ app.use(cors());
 const port = process.env.PORT || config.get("port");
 const server = app.listen(port, () => winston.info(`Listening on port ${port}`));
 
-export default server;
+module.exports = server;
