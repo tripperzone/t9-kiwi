@@ -28,7 +28,7 @@ const slice = createSlice({
     },
 
     suggestionsReceived: (state, action) => {
-      const { suggestions } = action.payload;
+      const { result: { suggestions } } = action.payload;
       state.list = suggestions;
       state.loading = false;
     },

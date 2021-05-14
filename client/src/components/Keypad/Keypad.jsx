@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { addKeyToString, getSuggestions, getCurrentKeyString } from "../../store/reducers/suggestions";
 
@@ -17,12 +18,15 @@ const StyledKeypad = styled.div`
 
 const Keypad = () => {
     const dispatch = useDispatch();
-    const { numericString } = useSelector(getCurrentKeyString);
+    const numericString = useSelector(getCurrentKeyString);
 
     const handleKeyClick = (key) => {
-        dispatch(addKeyToString({ key }));
-        dispatch(getSuggestions({ numericString }));
+        dispatch(addKeyToString(key));
     };
+
+    useEffect(() => {
+        dispatch(getSuggestions({ numericString }));
+    }, [dispatch, numericString]);
 
     return (
         <StyledKeypad>
