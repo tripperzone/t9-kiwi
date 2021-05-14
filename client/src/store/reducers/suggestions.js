@@ -38,8 +38,7 @@ const slice = createSlice({
     },
  
     suggestionsCleared: (state) => {
-      state.list.nodeLevel = [];
-      state.list.deepLevel = [];
+      state.numericString = '';
     },
   }
 });
