@@ -8,9 +8,8 @@ import { Key } from '../';
 import { keyDataMap } from '../../constants';
 
 const StyledKeypad = styled.div`
-    background: #CCCCCC;
-    height: 30%;
-    padding: 8px;
+    border: 1px #CCCCCC solid;
+    padding: 16px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;

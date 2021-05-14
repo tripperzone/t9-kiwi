@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import './App.css';
 
-import { Keypad, Screen } from './components';
+import { Keypad, Screen, Suggestions } from './components';
 
 const AppContainer = styled.div`
   display: flex;
@@ -10,11 +10,12 @@ const AppContainer = styled.div`
 `;
 
 const ControlContainer = styled.div`
-  flex-grow: 1;
+  flex: 1;
+  max-width: 300px;
 `;
 
 const ResultsContainer = styled.div`
-  flex-grow: 2;
+  flex: 2;
 `;
 
 const App = () => {
@@ -25,7 +26,7 @@ const App = () => {
         <Keypad/>
       </ControlContainer>
       <ResultsContainer>
-        
+        <Suggestions/>
       </ResultsContainer>
     </AppContainer>
   );
