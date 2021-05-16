@@ -9,7 +9,7 @@ export default class Dictionary {
     this.dictionaryPath = dictionaryPath;
   }
 
-  async prepareTrieDictionary() {
+  prepareTrieDictionary() {
     const lineReader = readline.createInterface({
       input: fs.createReadStream(this.dictionaryPath, {encoding: 'utf8'}),
       terminal: false
@@ -21,6 +21,7 @@ export default class Dictionary {
     });
 
     lineReader.on('close', () => winston.info('Trie dictionary ready'));
+    return lineReader;
   }
 
   getSuggestions(numericString) {
