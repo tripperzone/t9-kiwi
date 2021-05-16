@@ -1,0 +1,4 @@
+20	hello
+10	goodbye
+40	thanks
+30	developer
