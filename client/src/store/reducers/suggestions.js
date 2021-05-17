@@ -20,7 +20,8 @@ const slice = createSlice({
     },
 
     keyRemoved: (state) => {
-      state.numericString.slice(0, -1);
+      const newString = state.numericString.slice(0, -1);
+      state.numericString = newString;
     },
 
     suggestionsRequested: (state) => {
@@ -89,11 +90,16 @@ export const clearSuggestions = () => dispatch => {
 
 // Selectors
 export const getSuggestionsList = createSelector(
-    state => state.suggestions,
-    suggestions => suggestions.list
+  state => state.suggestions,
+  suggestions => suggestions.list
 );
 
 export const getCurrentKeyString = createSelector(
   state => state.suggestions,
   suggestions => suggestions.numericString
+);
+
+export const getLoadingIndicator = createSelector(
+  state => state.suggestions,
+  suggestions => suggestions.loading
 );
