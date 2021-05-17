@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { getSuggestionsList } from "../../store/reducers/suggestions";
+import { getSuggestionsList, getLoadingIndicator } from "../../store/reducers/suggestions";
 import { frequencyToColorMap } from "../../constants";
 
 import styled from 'styled-components';
@@ -39,15 +39,23 @@ const Suggestion = styled.div`
     margin-bottom: 6px;
 `;
 
+const LoadingIndicator = styled.div`
+    color: red;
+`;
+
 const Suggestions = () => {
 
     const { nodeLevel, deepLevel } = useSelector(getSuggestionsList);
+    const loading = useSelector(getLoadingIndicator);
 
     return (
         <SuggestionsContainer>
             <SuggestionsColumn>
                 <SuggestionsTitle>Current Words</SuggestionsTitle>
-                
+                { loading && 
+                    <LoadingIndicator>Current words are loading</LoadingIndicator>
+                }
+                { !loading && 
                 <SuggestionsResult>
                     { nodeLevel.map(({frequency, word}, index) => 
                         <Suggestion 
@@ -58,11 +66,15 @@ const Suggestions = () => {
                         </Suggestion>
                     ) }
                 </SuggestionsResult>
+                }
                 
             </SuggestionsColumn>
             <SuggestionsColumn>
                 <SuggestionsTitle>Other Suggestions</SuggestionsTitle>
-                
+                { loading && 
+                    <LoadingIndicator>Deep suggestions are loading</LoadingIndicator>
+                }
+                { !loading && 
                 <SuggestionsResult>
                     { deepLevel.map(({frequency, word}, index) =>
                         <Suggestion
@@ -73,6 +85,7 @@ const Suggestions = () => {
                         </Suggestion>
                     ) }
                 </SuggestionsResult>
+                }
                 
             </SuggestionsColumn>
             
